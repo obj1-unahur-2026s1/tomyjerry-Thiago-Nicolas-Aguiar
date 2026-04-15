@@ -1,17 +1,47 @@
 import tomJerryNibbles.*
 
-describe "Grupo de test" {
+describe "Tests de Tom y los ratones" {
 
-  test "test 1" {
-    assert.equals(100, 50+50)
-  }
+    test "Velocidad inicial de Tom es 10" {
+        assert.equals(10, tom.velocidadMaxima())
+    }
 
-  test "test 3" {
-    assert.that(true)
-  }
+    test "Tom come a Jerry (2 años) y la velocidad es 15.2" {
+        tom.comer(jerry) 
+        // Energía: 50 + 12 + (2 * 20) = 102
+        // Velocidad: 5 + (102 / 10) = 15.2
+        assert.equals(15.2, tom.velocidadMaxima())
+    }
 
-  test "test 4" {
-    assert.notThat(false)
-  }
+    test "Tom corre 24 metros y la velocidad baja a 14" {
+        tom.comer(jerry) // Para estar en el estado del caso anterior (102 energía)
+        tom.corre(24)    // 102 - (24 / 2) = 90 energía
+        assert.equals(14, tom.velocidadMaxima())
+    }
 
+    test "Escenario completo: comer, correr, comer a Nibbles y Jerry cumple años" {
+        // 1. Estado inicial
+        assert.equals(10, tom.velocidadMaxima())
+
+        // 2. Come a Jerry
+        tom.comer(jerry)
+        assert.equals(15.2, tom.velocidadMaxima())
+
+        // 3. Corre 24 metros
+        tom.corre(24)
+        assert.equals(14, tom.velocidadMaxima())
+
+        // 4. Come a Nibbles
+        tom.comer(nibbles) // 90 + 12 + 35 = 137 energía
+        assert.equals(18.7, tom.velocidadMaxima())
+
+        // 5. Jerry cumple años (3) y Tom lo vuelve a comer
+        jerry.edadNueva(3) 
+        tom.comer(jerry)   // 137 + 12 + (3 * 20) = 209 energía
+        assert.equals(25.9, tom.velocidadMaxima())
+
+        // 6. Corre 38 metros
+        tom.corre(38)      // 209 - (38 / 2) = 190 energía
+        assert.equals(24, tom.velocidadMaxima())
+    }
 }
