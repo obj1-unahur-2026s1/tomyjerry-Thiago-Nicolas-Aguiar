@@ -1,25 +1,6 @@
 import tomJerryNibbles.*
 
-describe "Tests de Tom y los ratones" {
-
-    test "Velocidad inicial de Tom es 10" {
-        assert.equals(10, tom.velocidadMaxima())
-    }
-
-    test "Tom come a Jerry (2 años) y la velocidad es 15.2" {
-        tom.comer(jerry) 
-        // Energía: 50 + 12 + (2 * 20) = 102
-        // Velocidad: 5 + (102 / 10) = 15.2
-        assert.equals(15.2, tom.velocidadMaxima())
-    }
-
-    test "Tom corre 24 metros y la velocidad baja a 14" {
-        tom.comer(jerry) // Para estar en el estado del caso anterior (102 energía)
-        tom.corre(24)    // 102 - (24 / 2) = 90 energía
-        assert.equals(14, tom.velocidadMaxima())
-    }
-
-    test "Escenario completo: comer, correr, comer a Nibbles y Jerry cumple años" {
+    test "Escenario completo" {
         // 1. Estado inicial
         assert.equals(10, tom.velocidadMaxima())
 
@@ -44,4 +25,9 @@ describe "Tests de Tom y los ratones" {
         tom.corre(38)      // 209 - (38 / 2) = 190 energía
         assert.equals(24, tom.velocidadMaxima())
     }
-}
+
+    // Parte 3
+    test "Caza Imposible" {
+        //Prueba que si tom no tiene energia no puede cazar a mickey
+        assert.notThat(tom.puedeCazar(500))
+    }

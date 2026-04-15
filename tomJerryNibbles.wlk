@@ -29,7 +29,7 @@ object jerry {
         edadInicial = nuevaEdad
     }
 
-    method peso() = edadInicial * 20
+    method peso() = self.edadActual() * 20
 }
 
 object nibbles {
@@ -37,3 +37,12 @@ object nibbles {
 }
 
 // Parte 3 Inventar otro ratón
+
+object mickey {
+    var edadInicial = 6
+    method edadActual() = edadInicial
+    method edadNueva(nuevaEdad) {
+        edadInicial = nuevaEdad
+    }
+    method peso() = self.edadActual() * 20
+}
